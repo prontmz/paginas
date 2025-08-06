@@ -1,77 +1,111 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // ========== MENU HAMBURGER PARA MOBILE ==========
+    // ========== NAVBAR RESPONSIVA ==========
+    const navbar = document.querySelector('.navbar');
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     const navContainer = document.getElementById('navContainer');
+    const navItems = document.querySelectorAll('.nav-item');
     
-    if (hamburgerMenu && navContainer) {
-        // Função para verificar a viewport e configurar a exibição inicial
-        function checkMobileView() {
-            if (window.innerWidth <= 768) {
+    if (navbar && hamburgerMenu && navContainer) {
+        // Função para verificar o tamanho da tela e ajustar a navbar
+        function setupNavbar() {
+            if (window.innerWidth <= 768) { // Modo mobile
+                // Configurações específicas para mobile
+                hamburgerMenu.style.display = 'flex';
                 navContainer.style.display = 'none';
-                hamburgerMenu.style.display = 'block';
-            } else {
-                navContainer.style.display = 'flex';
+                
+                // Adiciona evento de clique para o menu hamburger
+                hamburgerMenu.addEventListener('click', toggleMobileMenu);
+                
+                // Adiciona eventos para os itens do menu (mobile)
+                navItems.forEach(item => {
+                    item.addEventListener('click', closeMobileMenu);
+                });
+            } else { // Modo desktop
+                // Configurações específicas para desktop
                 hamburgerMenu.style.display = 'none';
-                hamburgerMenu.classList.remove('active');
-                navContainer.classList.remove('active');
+                navContainer.style.display = 'flex';
+                
+                // Remove eventos mobile se existirem
+                hamburgerMenu.removeEventListener('click', toggleMobileMenu);
+                navItems.forEach(item => {
+                    item.removeEventListener('click', closeMobileMenu);
+                });
             }
         }
         
-        // Configuração inicial
-        checkMobileView();
-        
-        // Evento de clique no hamburger
-        hamburgerMenu.addEventListener('click', function() {
+        // Função para alternar o menu mobile
+        function toggleMobileMenu() {
             this.classList.toggle('active');
             navContainer.classList.toggle('active');
             
-            // Controle explícito da exibição
+            // Controle explícito da exibição com animação
             if (navContainer.classList.contains('active')) {
                 navContainer.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Impede scroll quando menu está aberto
             } else {
                 navContainer.style.display = 'none';
+                document.body.style.overflow = ''; // Restaura scroll
             }
-        });
+        }
         
-        // Fechar menu ao clicar em um item (mobile)
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => {
-            item.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
-                    hamburgerMenu.classList.remove('active');
-                    navContainer.classList.remove('active');
-                    navContainer.style.display = 'none';
-                }
-            });
-        });
+        // Função para fechar o menu mobile
+        function closeMobileMenu() {
+            hamburgerMenu.classList.remove('active');
+            navContainer.classList.remove('active');
+            navContainer.style.display = 'none';
+            document.body.style.overflow = ''; // Restaura scroll
+        }
         
-        // Redimensionamento da janela
+        // Configura inicialmente a navbar
+        setupNavbar();
+        
+        // Atualiza quando a janela é redimensionada
         window.addEventListener('resize', function() {
-            checkMobileView();
+            setupNavbar();
+            
+            // Se mudar para desktop, garante que o menu está no estado correto
+            if (window.innerWidth > 768) {
+                hamburgerMenu.classList.remove('active');
+                navContainer.classList.remove('active');
+                navContainer.style.display = 'flex';
+                document.body.style.overflow = '';
+            }
         });
     }
 
-    // ========== CARROSSEL COM EFEITO FADE ==========
+    // ========== CARROSSEL ==========
     const carousel = document.querySelector('.carousel');
     const images = document.querySelectorAll('.carousel img');
-    let currentIndex = 0;
-    const intervalTime = 5000;
     
     if (carousel && images.length > 0) {
+        let currentIndex = 0;
+        const intervalTime = 5000;
+        let carouselInterval;
+        
         // Configuração inicial do carrossel
-        carousel.style.position = 'relative';
-        images.forEach(img => {
-            img.style.position = 'absolute';
-            img.style.top = '0';
-            img.style.left = '0';
-            img.style.width = '100%';
-            img.style.height = '100%';
-            img.style.opacity = '0';
-            img.style.transition = 'opacity 1s ease-in-out';
-        });
+        function initCarousel() {
+            carousel.style.position = 'relative';
+            
+            images.forEach((img, index) => {
+                img.style.position = 'absolute';
+                img.style.top = '0';
+                img.style.left = '0';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 1s ease-in-out';
+                
+                // Para mobile, ajusta o object-fit se necessário
+                if (window.innerWidth <= 768) {
+                    img.style.objectPosition = 'center center';
+                }
+            });
+            
+            images[currentIndex].style.opacity = '1';
+            startCarousel();
+        }
         
-        images[currentIndex].style.opacity = '1';
-        
+        // Avança para a próxima imagem
         function nextImage() {
             images[currentIndex].style.opacity = '0';
             currentIndex = (currentIndex + 1) % images.length;
@@ -81,18 +115,42 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 50);
         }
         
-        let carouselInterval = setInterval(nextImage, intervalTime);
-        
-        carousel.addEventListener('mouseenter', () => {
-            clearInterval(carouselInterval);
-        });
-        
-        carousel.addEventListener('mouseleave', () => {
+        // Inicia o carrossel automático
+        function startCarousel() {
+            if (carouselInterval) clearInterval(carouselInterval);
             carouselInterval = setInterval(nextImage, intervalTime);
+        }
+        
+        // Pausa o carrossel quando o mouse está sobre ele
+        function setupCarouselEvents() {
+            carousel.addEventListener('mouseenter', () => {
+                if (carouselInterval) clearInterval(carouselInterval);
+            });
+            
+            carousel.addEventListener('mouseleave', startCarousel);
+            
+            // Para touch devices
+            carousel.addEventListener('touchstart', () => {
+                if (carouselInterval) clearInterval(carouselInterval);
+            });
+            
+            carousel.addEventListener('touchend', startCarousel);
+        }
+        
+        initCarousel();
+        setupCarouselEvents();
+        
+        // Ajusta o carrossel no redimensionamento
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768) {
+                images.forEach(img => {
+                    img.style.objectPosition = 'center center';
+                });
+            }
         });
     }
 
-    // ========== FUNCIONALIDADE DE TABS ==========
+    // ========== SISTEMA DE TABS ==========
     const tabNavItems = document.querySelectorAll('.nav-item');
     const tabContents = document.querySelectorAll('.tab-content');
     
@@ -111,22 +169,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 const targetTab = document.getElementById(tabId);
                 if (targetTab) {
                     targetTab.classList.add('active');
+                    
+                    // Scroll suave para a seção
+                    setTimeout(() => {
+                        targetTab.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 100);
                 }
-            }
-            
-            // Scroll suave para a seção
-            const contentSection = document.querySelector('.content-section');
-            if (contentSection) {
-                window.scrollTo({
-                    top: contentSection.offsetTop - 20,
-                    behavior: 'smooth'
-                });
             }
         }
         
         // Adiciona eventos aos itens de navegação
         tabNavItems.forEach(item => {
             item.addEventListener('click', handleTabClick);
+            
+            // Para touch devices
+            item.addEventListener('touchend', handleTabClick);
         });
         
         // Ativa a primeira tab por padrão se nenhuma estiver ativa
@@ -143,38 +203,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ========== SCROLL SUAVE ==========
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    if (scrollIndicator) {
-        scrollIndicator.addEventListener('click', function() {
-            const navbar = document.querySelector('.navbar');
-            if (navbar) {
-                window.scrollTo({
-                    top: navbar.offsetTop,
-                    behavior: 'smooth'
-                });
+    // ========== EFEITOS DE HOVER/TOUCH ==========
+    const interactiveElements = document.querySelectorAll('.content-image, .species-image, .cta-button, .quiz-answer');
+    
+    if (interactiveElements.length > 0) {
+        function handleInteraction(e) {
+            const element = this;
+            
+            if (e.type === 'mouseenter' || e.type === 'touchstart') {
+                element.style.transform = 'scale(1.03)';
+                element.style.transition = 'all 0.3s ease';
+                
+                if (element.classList.contains('content-image') || element.classList.contains('species-image')) {
+                    element.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+                }
+            } else {
+                element.style.transform = 'scale(1)';
+                
+                if (element.classList.contains('content-image') || element.classList.contains('species-image')) {
+                    element.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                }
             }
-        });
-    }
-    
-    // ========== EFEITO HOVER NAS IMAGENS ==========
-    const imagesHover = document.querySelectorAll('.content-image, .species-image');
-    
-    function handleImageHover(e) {
-        if (e.type === 'mouseenter') {
-            this.style.transform = 'scale(1.02)';
-            this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-            this.style.transition = 'all 0.3s ease';
-        } else {
-            this.style.transform = 'scale(1)';
-            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
         }
-    }
-    
-    if (imagesHover.length > 0) {
-        imagesHover.forEach(img => {
-            img.addEventListener('mouseenter', handleImageHover);
-            img.addEventListener('mouseleave', handleImageHover);
+        
+        // Adiciona eventos para mouse e touch
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', handleInteraction);
+            element.addEventListener('mouseleave', handleInteraction);
+            element.addEventListener('touchstart', handleInteraction, { passive: true });
+            element.addEventListener('touchend', handleInteraction, { passive: true });
         });
     }
 });
