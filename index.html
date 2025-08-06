@@ -1,11 +1,364 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>África do Sul - Nação Arco-Íris</title>
+    <link rel="stylesheet" href="Css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <h1>Ola mundo</h1>
+    <!-- Header com Carrossel -->
+    <div class="hero">
+        <div class="carousel">
+            <!-- Imagens em formato WebP -->
+            <img src="../imagens/sul1.webp" alt="Table Mountain, Cidade do Cabo" loading="lazy">
+            <img src="../imagens/sul2.webp" alt="Safári no Kruger National Park" loading="lazy">
+            <img src="../imagens/sul3.webp" alt="Praia de Camps Bay" loading="lazy">
+            <img src="../imagens/sul4.webp" alt="Blyde River Canyon" loading="lazy">
+        </div>
+        
+        <div class="hero-content">
+            <h1>ÁFRICA DO SUL</h1>
+            <p>Descubra a Nação Arco-Íris, onde culturas, paisagens e aventuras se encontram</p>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-item active" data-tab="historia">História</div>
+            <div class="nav-item" data-tab="geografia">Geografia</div>
+            <div class="nav-item" data-tab="economia">Economia</div>
+            <div class="nav-item" data-tab="fauna">Fauna</div>
+            <div class="nav-item" data-tab="flora">Flora</div>
+            <div class="nav-item" data-tab="cultura">Cultura</div>
+            <div class="nav-item" data-tab="diversidade">Diversidade</div>
+            <div class="nav-item" data-tab="turismo">Turismo</div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <section class="content-section">
+            <!-- Tempo de leitura -->
+            <div class="reading-time">
+                <i class="far fa-clock"></i> Tempo estimado de leitura: 10 minutos
+            </div>
+
+            <!-- História -->
+            <div id="historia" class="tab-content active">
+                <h2 class="section-title">História da África do Sul</h2>
+                
+                <!-- Introdução -->
+                <div class="intro-box">
+                    <p>A história da África do Sul é uma tapeçaria complexa de culturas indígenas, colonização, conflitos e reconciliação, culminando na "Nação Arco-Íris" de hoje.</p>
+                </div>
+                
+                <p>A África do Sul tem uma das histórias mais complexas e fascinantes do continente africano. Habitada originalmente pelos povos Khoisan, a região viu a chegada dos Bantus por volta do século IV e dos colonizadores europeus no século XV.</p>
+                
+                <!-- Imagem WebP -->
+                <img src="../imagens/Angola1.webp" alt="Robben Island" class="content-image" loading="lazy">
+                <p class="image-caption">Robben Island, onde Nelson Mandela ficou preso por 18 anos</p>
+                
+                <p>O país foi palco de intensos conflitos entre colonizadores britânicos e bôeres (descendentes de holandeses), das Guerras dos Bôeres (1880-1881 e 1899-1902), e do regime do apartheid (1948-1994), um sistema de segregação racial que dividiu o país.</p>
+                
+                <!-- Fact box -->
+                <div class="fact-box">
+                    <h3><i class="fas fa-lightbulb"></i> Você sabia?</h3>
+                    <p>A África do Sul é conhecida como a "Nação Arco-Íris", termo cunhado pelo arcebispo Desmond Tutu para descrever a diversidade cultural do país pós-apartheid.</p>
+                </div>
+                
+                <p>Em 1994, após décadas de luta liderada pelo Congresso Nacional Africano (ANC) e figuras como Nelson Mandela, o apartheid foi desmantelado e realizou-se as primeiras eleições democráticas multirraciais, com Mandela se tornando o primeiro presidente negro do país.</p>
+                
+                <!-- Galeria com WebP -->
+                <h3 style="margin: 2rem 0 1rem; color: var(--primary);">Marcos Históricos</h3>
+                <div class="gallery">
+                    <img src="imagens/museu-distrito6.webp" alt="Distrito 6 Museum" loading="lazy">
+                    <img src="imagens/monumento-voortrekker.webp" alt="Voortrekker Monument" loading="lazy">
+                    <img src="imagens/union-buildings.webp" alt="Union Buildings" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Geografia -->
+            <div id="geografia" class="tab-content">
+                <h2 class="section-title">Geografia da África do Sul</h2>
+                
+                <div class="intro-box">
+                    <p>Com paisagens que variam de desertos áridos a florestas exuberantes, a geografia da África do Sul é tão diversa quanto sua cultura.</p>
+                </div>
+                
+                <p>A África do Sul está situada no extremo sul do continente africano, com um litoral de 2.798 km banhado pelos oceanos Atlântico e Índico. O país faz fronteira com Namíbia, Botsuana, Zimbábue, Moçambique e Essuatíni, e circunda o Lesoto.</p>
+                
+                <img src="imagens/blyde-canyon.webp" alt="Blyde River Canyon" class="content-image" loading="lazy">
+                <p class="image-caption">Blyde River Canyon, um dos maiores cânions do mundo</p>
+                
+                <div class="fact-box">
+                    <h3><i class="fas fa-mountain"></i> Destaque Geográfico</h3>
+                    <p>O Table Mountain na Cidade do Cabo é uma das montanhas mais antigas do mundo, com cerca de 260 milhões de anos, e abriga mais espécies de plantas que todo o Reino Unido.</p>
+                </div>
+                
+                <p>O país possui três capitais: Pretória (executiva), Cidade do Cabo (legislativa) e Bloemfontein (judiciária). O relevo varia desde planícies costeiras até o planalto central (Highveld) e cadeias montanhosas como os Drakensberg.</p>
+                
+                <!-- Quiz -->
+                <div class="quiz-container">
+                    <h3>Teste Seu Conhecimento</h3>
+                    <div class="quiz-question">
+                        <p>Quantas capitais oficiais tem a África do Sul?</p>
+                        <button class="quiz-answer" onclick="checkAnswer(this, false)">1</button>
+                        <button class="quiz-answer" onclick="checkAnswer(this, false)">2</button>
+                        <button class="quiz-answer" onclick="checkAnswer(this, true)">3</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Economia -->
+            <div id="economia" class="tab-content">
+                <h2 class="section-title">Economia da África do Sul</h2>
+                
+                <div class="intro-box">
+                    <p>Como a segunda maior economia da África, a África do Sul é um importante player global com setores diversificados e desafios únicos.</p>
+                </div>
+                
+                <p>A África do Sul possui a economia mais industrializada e tecnologicamente avançada da África, sendo classificada como um país de renda média-alta. O país é rico em recursos minerais, sendo o maior produtor mundial de platina, cromo, manganês e vanádio.</p>
+                
+                <img src="imagens/johannesburg.webp" alt="Centro financeiro de Joanesburgo" class="content-image" loading="lazy">
+                <p class="image-caption">Centro financeiro de Joanesburgo, coração econômico do país</p>
+                
+                <div class="fact-box">
+                    <h3><i class="fas fa-chart-line"></i> Dado Econômico</h3>
+                    <p>A África do Sul abriga a Bolsa de Valores de Joanesburgo (JSE), a maior da África e uma das 20 maiores do mundo em capitalização de mercado.</p>
+                </div>
+                
+                <p>Principais setores econômicos:
+                <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                    <li>Mineração (ouro, diamantes, metais preciosos)</li>
+                    <li>Manufatura (automotiva, aço, produtos químicos)</li>
+                    <li>Turismo</li>
+                    <li>Agricultura (vinhos, frutas, milho)</li>
+                    <li>Serviços financeiros</li>
+                </ul>
+                </p>
+                
+                <!-- CTA -->
+                <div class="cta-box">
+                    <h3>Interessado em oportunidades na África do Sul?</h3>
+                    <p>Conheça os setores em crescimento e as oportunidades de investimento neste mercado dinâmico.</p>
+                    <a href="#" class="cta-button">SAIBA MAIS</a>
+                </div>
+            </div>
+
+            <!-- Fauna -->
+            <div id="fauna" class="tab-content">
+                <h2 class="section-title">Fauna da África do Sul</h2>
+                
+                <div class="intro-box">
+                    <p>A África do Sul é um dos melhores lugares do mundo para observar vida selvagem, abrigando uma incrível diversidade de espécies animais.</p>
+                </div>
+                
+                <p>O país é famoso por seus "Big Five" (leão, leopardo, rinoceronte, elefante e búfalo), mas sua biodiversidade vai muito além. A África do Sul possui mais de 300 espécies de mamíferos, 500 espécies de aves e 100 espécies de répteis.</p>
+                
+                <img src="imagens/kruger-park.webp" alt="Leões no Kruger National Park" class="content-image" loading="lazy">
+                <p class="image-caption">Leões no Kruger National Park, o maior parque nacional do país</p>
+                
+                <div class="fact-box">
+                    <h3><i class="fas fa-paw"></i> Curiosidade Animal</h3>
+                    <p>A África do Sul abriga 80% das populações mundiais de rinocerontes, mas enfrenta uma crise de caça furtiva que ameaça esta espécie icônica.</p>
+                </div>
+                
+                <p>Principais áreas de conservação:
+                <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                    <li>Kruger National Park (um dos maiores do mundo)</li>
+                    <li>Addo Elephant National Park</li>
+                    <li>Hluhluwe-Imfolozi Park (berço da conservação do rinoceronte branco)</li>
+                    <li>iSimangaliso Wetland Park (Patrimônio Mundial da UNESCO)</li>
+                </ul>
+                </p>
+                
+                <!-- Galeria WebP -->
+                <h3 style="margin: 2rem 0 1rem; color: var(--primary);">Vida Selvagem</h3>
+                <div class="gallery">
+                    <img src="imagens/elefantes.webp" alt="Elefantes" loading="lazy">
+                    <img src="imagens/rinoceronte.webp" alt="Rinoceronte" loading="lazy">
+                    <img src="imagens/pinguins.webp" alt="Pinguins africanos" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Flora -->
+            <div id="flora" class="tab-content">
+                <h2 class="section-title">Flora da África do Sul</h2>
+                
+                <div class="intro-box">
+                    <p>Com uma das floras mais diversas do planeta, a África do Sul é um verdadeiro paraíso botânico com milhares de espécies endêmicas.</p>
+                </div>
+                
+                <p>A África do Sul possui cerca de 20.000 espécies de plantas vasculares, representando quase 10% de todas as espécies conhecidas no mundo. O Reino Florístico do Cabo é um dos seis reinos florísticos do mundo e o único contido em um único país.</p>
+                
+                <img src="imagens/fynbos.webp" alt="Fynbos no Cabo" class="content-image" loading="lazy">
+                <p class="image-caption">Vegetação de fynbos, exclusiva da região do Cabo</p>
+                
+                <div class="fact-box">
+                    <h3><i class="fas fa-tree"></i> Símbolo Natural</h3>
+                    <p>A protea, flor nacional da África do Sul, é uma das muitas espécies do fynbos, um bioma único que ocorre apenas na pequena região do Cabo Ocidental.</p>
+                </div>
+                
+                <p>Principais biomas vegetais:
+                <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                    <li>Fynbos (Região do Cabo - biodiversidade única)</li>
+                    <li>Savana (predominante no norte e leste)</li>
+                    <li>Floresta (pequenas áreas ao longo da costa sul)</li>
+                    <li>Deserto (região de Namaqualand)</li>
+                    <li>Grassland (Highveld central)</li>
+                </ul>
+                </p>
+                
+                <p>A região de Namaqualand é famosa por sua explosão de flores silvestres na primavera, quando o deserto árido se transforma em um tapete colorido de flores.</p>
+            </div>
+
+            <!-- Cultura -->
+            <div id="cultura" class="tab-content">
+                <h2 class="section-title">Cultura Sul-Africana</h2>
+                
+                <div class="intro-box">
+                    <p>A cultura sul-africana é um vibrante mosaico de tradições africanas, influências europeias e asiáticas, criando uma identidade única no mundo.</p>
+                </div>
+                
+                <p>A África do Sul tem 11 línguas oficiais, incluindo zulu, xhosa, africâner e inglês. Essa diversidade linguística reflete a riqueza cultural do país, conhecido como a "Nação Arco-Íris" por sua diversidade étnica e cultural.</p>
+                
+                <img src="imagens/danca-zulu.webp" alt="Dança tradicional Zulu" class="content-image" loading="lazy">
+                <p class="image-caption">Dança tradicional Zulu, uma das muitas expressões culturais do país</p>
+                
+                <div class="fact-box">
+                    <h3><i class="fas fa-music"></i> Patrimônio Cultural</h3>
+                    <p>O estilo musical kwaito, nascido nas townships sul-africanas, é uma das contribuições mais originais do país à cultura global, misturando house music com ritmos africanos.</p>
+                </div>
+                
+                <p>A culinária sul-africana reflete sua diversidade cultural:
+                <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                    <li>Braai (churrasco sul-africano, quase uma instituição nacional)</li>
+                    <li>Bobotie (prato de origem malaia com carne moída e cobertura de ovo)</li>
+                    <li>Biltong (carne seca temperada, snack popular)</li>
+                    <li>Vinhos da região do Cabo (entre os melhores do mundo)</li>
+                </ul>
+                </p>
+                
+                <!-- Compartilhamento -->
+                <div class="social-share">
+                    <span>Compartilhe:</span>
+                    <a href="#" aria-label="Compartilhar no Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Compartilhar no Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Compartilhar no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <!-- Diversidade -->
+            <div id="diversidade" class="tab-content">
+                <h2 class="section-title">Diversidade da África do Sul</h2>
+                
+                <div class="intro-box">
+                    <p>A África do Sul é um dos países mais diversos do mundo, com uma mistura única de culturas, línguas e tradições que convivem em harmonia.</p>
+                </div>
+                
+                <p>O país tem uma população de cerca de 60 milhões de pessoas, composta por vários grupos étnicos: negros africanos (80%), brancos (8%), mestiços (9%) e indianos/asiáticos (3%). Essa diversidade é resultado de séculos de migrações, colonização e comércio.</p>
+                
+                <img src="imagens/cidade-cabo.webp" alt="Cidade do Cabo multicultural" class="content-image" loading="lazy">
+                <p class="image-caption">Cidade do Cabo, exemplo da diversidade sul-africana</p>
+                
+                <div class="fact-box">
+                    <h3><i class="fas fa-users"></i> Curiosidade Cultural</h3>
+                    <p>O Dia da Reconciliação (16 de dezembro) é um feriado nacional que celebra a unidade e reconciliação entre os diversos grupos culturais do país.</p>
+                </div>
+                
+                <p>Religiões na África do Sul:
+                <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                    <li>Cristianismo (86%)</li>
+                    <li>Religiões tradicionais africanas (5,3%)</li>
+                    <li>Islamismo (1,7%)</li>
+                    <li>Hinduísmo (1%)</li>
+                    <li>Outras ou nenhuma (6%)</li>
+                </ul>
+                </p>
+                
+                <p>A Constituição sul-africana é uma das mais progressistas do mundo, garantindo direitos iguais a todos os cidadãos independentemente de raça, gênero ou orientação sexual.</p>
+            </div>
+
+            <!-- Turismo -->
+            <div id="turismo" class="tab-content">
+                <h2 class="section-title">Turismo na África do Sul</h2>
+                
+                <div class="intro-box">
+                    <p>Da Table Mountain às praias de Durban, dos safáris do Kruger aos vinhedos de Stellenbosch, a África do Sul oferece experiências turísticas inesquecíveis.</p>
+                </div>
+                
+                <p>A África do Sul é um dos destinos turísticos mais populares da África, oferecendo uma incrível variedade de experiências: safáris de vida selvagem, praias deslumbrantes, montanhas impressionantes, cidades vibrantes e rotas vinícolas de classe mundial.</p>
+                
+                <img src="imagens/table-mountain2.webp" alt="Table Mountain" class="content-image" loading="lazy">
+                <p class="image-caption">Table Mountain, cartão postal da Cidade do Cabo</p>
+                
+                <div class="fact-box">
+                    <h3><i class="fas fa-umbrella-beach"></i> Destaque Turístico</h3>
+                    <p>A Rota Jardim, que se estende por 300 km ao longo da costa sul, é considerada uma das rotas cênicas mais bonitas do mundo, com florestas, praias e montanhas.</p>
+                </div>
+                
+                <p>Principais atrações turísticas:
+                <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                    <li>Cidade do Cabo (Table Mountain, Robben Island, Cabo da Boa Esperança)</li>
+                    <li>Parque Nacional Kruger (melhor safári da África)</li>
+                    <li>Rota dos Vinhos de Stellenbosch/Franschhoek</li>
+                    <li>Durban (praias e cultura indiana)</li>
+                    <li>Blyde River Canyon (panoramas deslumbrantes)</li>
+                </ul>
+                </p>
+                
+                <!-- CTA -->
+                <div class="cta-box">
+                    <h3>Pronto para explorar a África do Sul?</h3>
+                    <p>Descubra pacotes de viagem exclusivos para conhecer as maravilhas desta nação incrivelmente diversa.</p>
+                    <a href="#" class="cta-button">VER OPÇÕES DE VIAGEM</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé com políticas e contato -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Sobre Nós</h3>
+                <p>Somos apaixonados pela África do Sul e dedicados a compartilhar a beleza e cultura desta incrível nação com o mundo.</p>
+                <div class="privacy-links">
+                    <a href="#politica-privacidade">Política de Privacidade</a>
+                    <a href="#termos-uso">Termos de Uso</a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="#historia">História</a></li>
+                    <li><a href="#geografia">Geografia</a></li>
+                    <li><a href="#fauna">Fauna</a></li>
+                    <li><a href="#flora">Flora</a></li>
+                    <li><a href="#turismo">Turismo</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contato</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> sulafricaturismo@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Maputo, mocambique</p>
+                </div>
+            </div>
+            
+         >
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 África do Sul - Nação Arco-Íris. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="Js/script.js"></script>
 </body>
 </html>
