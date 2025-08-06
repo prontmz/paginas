@@ -4,33 +4,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const navContainer = document.getElementById('navContainer');
     
     if (hamburgerMenu && navContainer) {
+        // Função para verificar a viewport e configurar a exibição inicial
+        function checkMobileView() {
+            if (window.innerWidth <= 768) {
+                navContainer.style.display = 'none';
+                hamburgerMenu.style.display = 'block';
+            } else {
+                navContainer.style.display = 'flex';
+                hamburgerMenu.style.display = 'none';
+                hamburgerMenu.classList.remove('active');
+                navContainer.classList.remove('active');
+            }
+        }
+        
+        // Configuração inicial
+        checkMobileView();
+        
+        // Evento de clique no hamburger
         hamburgerMenu.addEventListener('click', function() {
             this.classList.toggle('active');
             navContainer.classList.toggle('active');
+            
+            // Controle explícito da exibição
+            if (navContainer.classList.contains('active')) {
+                navContainer.style.display = 'flex';
+            } else {
+                navContainer.style.display = 'none';
+            }
         });
         
-        // Fechar o menu quando um item for clicado (em dispositivos móveis)
+        // Fechar menu ao clicar em um item (mobile)
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
             item.addEventListener('click', function() {
                 if (window.innerWidth <= 768) {
                     hamburgerMenu.classList.remove('active');
                     navContainer.classList.remove('active');
+                    navContainer.style.display = 'none';
                 }
             });
         });
         
-        // Atualizar a exibição do menu quando a janela for redimensionada
+        // Redimensionamento da janela
         window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                hamburgerMenu.classList.remove('active');
-                navContainer.classList.remove('active');
-                navContainer.style.display = 'flex';
-            } else {
-                if (!hamburgerMenu.classList.contains('active')) {
-                    navContainer.style.display = 'none';
-                }
-            }
+            checkMobileView();
         });
     }
 
@@ -38,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const carousel = document.querySelector('.carousel');
     const images = document.querySelectorAll('.carousel img');
     let currentIndex = 0;
-    const intervalTime = 5000; // 5 segundos
+    const intervalTime = 5000;
     
     if (carousel && images.length > 0) {
         // Configuração inicial do carrossel
@@ -53,62 +70,51 @@ document.addEventListener('DOMContentLoaded', function() {
             img.style.transition = 'opacity 1s ease-in-out';
         });
         
-        // Mostra a primeira imagem
         images[currentIndex].style.opacity = '1';
         
         function nextImage() {
-            // Esmaece a imagem atual
             images[currentIndex].style.opacity = '0';
-            
-            // Avança para a próxima imagem
             currentIndex = (currentIndex + 1) % images.length;
             
-            // Mostra a nova imagem após um pequeno delay
             setTimeout(() => {
                 images[currentIndex].style.opacity = '1';
             }, 50);
         }
         
-        // Inicia o carrossel automático
         let carouselInterval = setInterval(nextImage, intervalTime);
         
-        // Pausa o carrossel quando o mouse está sobre ele
         carousel.addEventListener('mouseenter', () => {
             clearInterval(carouselInterval);
         });
         
-        // Retoma o carrossel quando o mouse sai
         carousel.addEventListener('mouseleave', () => {
             carouselInterval = setInterval(nextImage, intervalTime);
         });
     }
 
     // ========== FUNCIONALIDADE DE TABS ==========
-    const navItems = document.querySelectorAll('.nav-item');
+    const tabNavItems = document.querySelectorAll('.nav-item');
     const tabContents = document.querySelectorAll('.tab-content');
     
-    if (navItems.length > 0 && tabContents.length > 0) {
+    if (tabNavItems.length > 0 && tabContents.length > 0) {
         function handleTabClick() {
             // Remove a classe active de todos os itens e conteúdos
-            navItems.forEach(navItem => navItem.classList.remove('active'));
+            tabNavItems.forEach(navItem => navItem.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
             
             // Adiciona a classe active ao item clicado
             this.classList.add('active');
             
-            // Obtém o ID da tab correspondente
+            // Ativa o conteúdo correspondente
             const tabId = this.getAttribute('data-tab');
-            
             if (tabId) {
                 const targetTab = document.getElementById(tabId);
                 if (targetTab) {
                     targetTab.classList.add('active');
-                } else {
-                    console.error('Tab content não encontrado para o ID:', tabId);
                 }
             }
             
-            // Scroll suave para a seção de conteúdo
+            // Scroll suave para a seção
             const contentSection = document.querySelector('.content-section');
             if (contentSection) {
                 window.scrollTo({
@@ -118,16 +124,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Adiciona o evento de clique a cada item de navegação
-        navItems.forEach(item => {
+        // Adiciona eventos aos itens de navegação
+        tabNavItems.forEach(item => {
             item.addEventListener('click', handleTabClick);
         });
         
         // Ativa a primeira tab por padrão se nenhuma estiver ativa
         const activeTabs = document.querySelectorAll('.nav-item.active, .tab-content.active');
-        if (activeTabs.length === 0 && navItems.length > 0) {
-            navItems[0].classList.add('active');
-            const firstTabId = navItems[0].getAttribute('data-tab');
+        if (activeTabs.length === 0 && tabNavItems.length > 0) {
+            tabNavItems[0].classList.add('active');
+            const firstTabId = tabNavItems[0].getAttribute('data-tab');
             if (firstTabId) {
                 const firstTabContent = document.getElementById(firstTabId);
                 if (firstTabContent) {
@@ -135,10 +141,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-    } else {
-        console.warn('Elementos de tabs não encontrados na página');
     }
-    
+
     // ========== SCROLL SUAVE ==========
     const scrollIndicator = document.querySelector('.scroll-indicator');
     if (scrollIndicator) {
